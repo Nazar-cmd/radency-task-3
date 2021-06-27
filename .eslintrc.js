@@ -3,14 +3,7 @@ module.exports = {
 	root: true,
 	parser: "babel-eslint",
 	plugins: ["import", "babel", "prettier"],
-	settings: {
-		"import/resolver": {
-			node: {
-				moduleDirectory: ["node_modules", "/"]
-				// paths: ["src"]
-			}
-		}
-	},
+
 	env: {
 		es2021: true,
 		node: true

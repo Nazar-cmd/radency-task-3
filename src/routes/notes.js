@@ -1,4 +1,6 @@
 import { Router } from "express";
+// eslint-disable-next-line import/named
+import { addNoteServiceWithValidation } from "../services/notes/index.js";
 
 const router = Router();
 
@@ -8,7 +10,7 @@ router.get("/:id/");
 
 router.get("/notes/stats");
 
-router.post("/");
+router.post("/", addNoteServiceWithValidation);
 
 router.delete("/:id/");
 
