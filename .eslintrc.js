@@ -24,7 +24,7 @@ module.exports = {
 		quotes: [2, "double", { avoidEscape: true }],
 		"no-tabs": 0,
 		indent: [2, "tab"],
-		"no-console": 1,
+		"no-console": 0,
 		"no-unused-vars": 1,
 		"global-require": 0,
 		"no-return-await": 2,
