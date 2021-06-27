@@ -6,8 +6,8 @@ module.exports = {
 	settings: {
 		"import/resolver": {
 			node: {
-				moduleDirectory: ["node_modules", "/"],
-				paths: ["src"]
+				moduleDirectory: ["node_modules", "/"]
+				// paths: ["src"]
 			}
 		}
 	},
@@ -20,6 +20,8 @@ module.exports = {
 		sourceType: "module"
 	},
 	rules: {
+		"import/extensions": 0,
+		"import/prefer-default-export": 0,
 		"comma-dangle": ["error", "never"],
 		quotes: [2, "double", { avoidEscape: true }],
 		"no-tabs": 0,
