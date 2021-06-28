@@ -68,8 +68,8 @@ describe("Notes API", () => {
 				.request(server)
 				.get(`/notes/${noteId}/`)
 				.end((err, response) => {
-					response.should.have.status(NOT_FOUND);
-					response.body.message.should.be.eq(INVALID_NOTE_ID.message);
+					response.should.have.status(INVALID_NOTE_ID.statusCode);
+					// response.body.message.should.be.eq(INVALID_NOTE_ID.message);
 					done();
 				});
 		});
@@ -77,6 +77,33 @@ describe("Notes API", () => {
 
 	/**
 	 * Test the GET stats route
+	 * */
+
+	describe("GET /notes/stats/", () => {
+		it("It should GET a notes stats", (done) => {
+			chai
+				.request(server)
+				.get("/notes/stats/")
+				.end((err, response) => {
+					response.should.have.status(OK);
+					response.body.should.be.a("array");
+					done();
+				});
+		});
+
+		it("It should NOT GET a notes stats", (done) => {
+			chai
+				.request(server)
+				.get("/notes/stats/1")
+				.end((err, response) => {
+					response.should.have.status(NOT_FOUND);
+					done();
+				});
+		});
+	});
+
+	/**
+	 * Test the POST route
 	 * */
 
 	describe("POST /notes", () => {
@@ -121,7 +148,7 @@ describe("Notes API", () => {
 				});
 		});
 
-		it("It should NOT POST a note ", (done) => {
+		it("It should NOT POST a note with this category", (done) => {
 			const note = {
 				name: "OLX",
 				content: "To sell my giraffes",
@@ -143,12 +170,131 @@ describe("Notes API", () => {
 	});
 
 	/**
-	 * Test the POST route
-	 * */
-	/**
 	 * Test the PATCH route
 	 * */
+
+	describe("PATCH /notes/:id/", () => {
+		it("It should PATCH a note with changed name, content, category", (done) => {
+			const id = 1;
+			const note = {
+				name: "DIVAN",
+				content: "To sell my thoughts",
+				category: "Quote"
+			};
+			chai
+				.request(server)
+				.patch(`/notes/${id}/`)
+				.send({ note })
+				.end((err, response) => {
+					response.should.have.status(CREATED);
+					response.body.should.be.a("object");
+					response.body.should.have.property("name").eq("DIVAN");
+					response.body.should.have.property("category").eq("Quote");
+					response.body.should.have.property("archived").eq(false);
+					response.body.should.have
+						.property("content")
+						.eq("To sell my thoughts");
+					done();
+				});
+		});
+
+		it("It should PATCH a note with changed 'archived' property", (done) => {
+			const id = 1;
+			const note = {
+				name: "DIVAN",
+				content: "To sell my thoughts",
+				category: "Quote",
+				archived: true
+			};
+			chai
+				.request(server)
+				.patch(`/notes/${id}/`)
+				.send({ note })
+				.end((err, response) => {
+					response.should.have.status(CREATED);
+					response.body.should.be.a("object");
+					response.body.should.have.property("name").eq("DIVAN");
+					response.body.should.have.property("category").eq("Quote");
+					response.body.should.have.property("archived").eq(true);
+					response.body.should.have
+						.property("content")
+						.eq("To sell my thoughts");
+					done();
+				});
+		});
+
+		it("It should NOT PATCH a note with not bool 'archived property'", (done) => {
+			const id = 1;
+			const note = {
+				name: "DIVAN",
+				content: "To sell my thoughts",
+				category: "Quote",
+				archived: "t"
+			};
+			chai
+				.request(server)
+				.patch(`/notes/${id}/`)
+				.send({ note })
+				.end((err, response) => {
+					response.should.have.status(BAD_REQUEST);
+					response.body.error.type.should.be.eq("typeError");
+					response.body.error.message.should.be.eq(
+						'archived must be a `boolean` type, but the final value was: `"t"`.'
+					);
+					done();
+				});
+		});
+
+		/*		it("It should NOT PATCH a note with this ID", (done) => {
+			const id = 11;
+			const note = {
+				name: "DIVAN",
+				content: "To sell my thoughts",
+				category: "Quote",
+				archived: true
+			};
+			chai
+				.request(server)
+				.patch(`/notes/${id}/`)
+				.send({ note })
+				.end((err, response) => {
+					response.should.have.status(INVALID_NOTE_ID.statusCode);
+					done();
+				});
+		}); */
+	});
+
 	/**
 	 * Test the DELETE route
 	 * */
+
+	describe("DELETE /notes/:id/", () => {
+		it("It should DELETE a note", (done) => {
+			const id = 1;
+			chai
+				.request(server)
+				.delete(`/notes/${id}`)
+				.end((err, response) => {
+					response.should.have.status(OK);
+					response.body.should.be.a("object");
+					response.body.should.have.property("name");
+					response.body.should.have.property("category");
+					response.body.should.have.property("archived");
+					response.body.should.have.property("created");
+					response.body.should.have.property("content");
+					done();
+				});
+		});
+
+		it("It should NOT DELETE a note without the name property", (done) => {
+			const id = 11;
+			chai
+				.request(server)
+				.delete(`/notes/${id}`)
+				.end((err, response) => {
+					response.should.have.status(errors.INVALID_NOTE_ID.statusCode);
+					done();
+				});
+		});
+	});
 });

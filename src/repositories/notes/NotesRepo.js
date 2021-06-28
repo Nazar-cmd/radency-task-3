@@ -24,7 +24,7 @@ export class NotesRepo {
 
 	async deleteNote(index) {
 		this.indexValidation(index);
-		return this.#notes.splice(index, 1);
+		return this.#notes.splice(index, 1)[0];
 	}
 
 	async updateNote(index, newNote) {
