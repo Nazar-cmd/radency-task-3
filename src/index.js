@@ -17,6 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/notes", notes);
 
-app.listen(PORT, () => {
+export default app.listen(PORT, () => {
 	console.log(`server has been started on port ${PORT} ...`);
 });

@@ -7,7 +7,7 @@ const { CREATED, OK } = statusCodes;
 const getNotes = async (req, res) => {
 	const notes = await notesRepo.getAllNotes();
 
-	res.status(CREATED).json({ notes });
+	res.status(OK).send(notes);
 };
 
 const getNote = async (req, res) => {
@@ -15,11 +15,10 @@ const getNote = async (req, res) => {
 
 	const note = await notesRepo.getNote(id);
 
-	res.status(CREATED).json({ note });
+	res.status(OK).send(note);
 };
 
 const getStats = async (req, res) => {
-	console.log("asdddddddddd");
 	const notes = await notesRepo.getAllNotes();
 
 	const categories = [...new Set(notes.map((note) => note.category).sort())];
@@ -39,7 +38,7 @@ const getStats = async (req, res) => {
 		};
 	});
 
-	res.status(CREATED).json({ stats });
+	res.status(OK).send(stats);
 };
 
 const createNote = async (req, res) => {
@@ -48,7 +47,7 @@ const createNote = async (req, res) => {
 
 	const createdNote = await notesRepo.createNote(newNote);
 
-	res.status(CREATED).json({ createdNote });
+	res.status(CREATED).send(createdNote);
 };
 
 const deleteNote = async (req, res) => {
@@ -56,7 +55,7 @@ const deleteNote = async (req, res) => {
 
 	const deletedNote = await notesRepo.deleteNote(id);
 
-	res.status(CREATED).json({ deletedNote });
+	res.status(OK).send(deletedNote);
 };
 
 const updateNote = async (req, res) => {
@@ -65,7 +64,7 @@ const updateNote = async (req, res) => {
 
 	const updatedNote = await notesRepo.updateNote(id, note);
 
-	res.status(CREATED).json({ updatedNote });
+	res.status(CREATED).send(updatedNote);
 };
 
 export { getNotes, createNote, deleteNote, updateNote, getNote, getStats };
