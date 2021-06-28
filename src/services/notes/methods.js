@@ -19,6 +19,7 @@ const getNote = async (req, res) => {
 };
 
 const getStats = async (req, res) => {
+	console.log("asdddddddddd");
 	const notes = await notesRepo.getAllNotes();
 
 	const categories = [...new Set(notes.map((note) => note.category).sort())];
@@ -62,7 +63,7 @@ const updateNote = async (req, res) => {
 	const { note } = req.body;
 	const { id } = req.params;
 
-	const updatedNote = await notesRepo.updateNote(note, id);
+	const updatedNote = await notesRepo.updateNote(id, note);
 
 	res.status(CREATED).json({ updatedNote });
 };

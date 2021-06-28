@@ -12,9 +12,9 @@ const router = Router();
 
 router.get("/", getNotesService);
 
-router.get("/:id/", getNoteService);
+router.get("/stats/", getStatsService);
 
-router.get("/notes/stats", getStatsService);
+router.get("/:id/", getNoteService);
 
 router.post("/", createNoteService);
 
