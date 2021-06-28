@@ -1,5 +1,5 @@
 import _state from "./_state.js";
-import { ErrorWithCode } from "../../helpers/index.js";
+import { errors } from "../../helpers/index.js";
 
 export class NotesRepo {
 	#notes = [];
@@ -41,11 +41,7 @@ export class NotesRepo {
 
 	indexValidation(index) {
 		if (index > this.#notes.length - 1) {
-			throw new ErrorWithCode(
-				"WrongID",
-				404,
-				"There is no note with such index"
-			);
+			throw errors.INVALID_NOTE_ID;
 		}
 	}
 }

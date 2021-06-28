@@ -1,5 +1,5 @@
-export class ErrorWithCode extends Error {
-	statusCode = 500;
+class ErrorWithCode extends Error {
+	statusCode = 404;
 
 	constructor(name, statusCode, message) {
 		super(message);
