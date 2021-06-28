@@ -15,6 +15,7 @@ module.exports = {
 	},
 	rules: {
 		'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
+		'consistent-return': 0,
 		"object-curly-newline": 0,
 		"import/extensions": 0,
 		"import/prefer-default-export": 0,
