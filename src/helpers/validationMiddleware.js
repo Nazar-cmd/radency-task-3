@@ -1,8 +1,8 @@
 const validationMiddleware = (schema) => async (req, res, next) => {
-	const { body } = req;
+	const { note } = req.body;
 
 	try {
-		await schema.validate(body);
+		await schema.validate(note);
 		next();
 		return next();
 	} catch (error) {

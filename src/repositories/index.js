@@ -1,3 +1,3 @@
-import notes from "./notes/index.js";
+import { notesRepo } from "./notes/index.js";
 
-export { notes };
+export { notesRepo };

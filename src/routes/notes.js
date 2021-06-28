@@ -1,18 +1,25 @@
 import { Router } from "express";
-import { createNoteService } from "../services/index.js";
+import {
+	createNoteService,
+	getStatsService,
+	updateNoteService,
+	deleteNoteService,
+	getNotesService,
+	getNoteService
+} from "../services/notes/index.js";
 
 const router = Router();
 
-router.get("/");
+router.get("/", getNotesService);
 
-router.get("/:id/");
+router.get("/:id/", getNoteService);
 
-router.get("/notes/stats");
+router.get("/notes/stats", getStatsService);
 
 router.post("/", createNoteService);
 
-router.delete("/:id/");
+router.delete("/:id/", deleteNoteService);
 
-router.patch("/:id/");
+router.patch("/:id/", updateNoteService);
 
 export default router;

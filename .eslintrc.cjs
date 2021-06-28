@@ -13,6 +13,7 @@ module.exports = {
 		sourceType: "module"
 	},
 	rules: {
+		"object-curly-newline": 2,
 		"import/extensions": 0,
 		"import/prefer-default-export": 0,
 		"comma-dangle": ["error", "never"],
