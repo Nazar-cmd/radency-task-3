@@ -1,18 +1,24 @@
 import noteSchema from "./noteSchema.js";
-import { withValidation, statusCodes } from "../../helpers/index.js";
+import { validationMiddleware, statusCodes } from "../../helpers/index.js";
+import { notes } from "../../repositories/index.js";
 
 const { CREATED, OK } = statusCodes;
 
-const addNoteService = (req, res) => {
+const createNote = async (req, res) => {
 	const note = req.body;
 	const newNote = noteSchema.cast(note);
 
-	res.status(CREATED).json({ newNote });
+	const createdNote = await notes.createNote(newNote);
+
+	res.status(CREATED).json({ createdNote });
 };
 
-const createNoteServiceWithValidation = withValidation(
-	noteSchema,
-	addNoteService
-);
+// prettier-ignore
+const withCatch =	(fn) => (...args) => fn(...args).catch(args[2]);
 
-export { createNoteServiceWithValidation };
+const createNoteService = [
+	validationMiddleware(noteSchema),
+	withCatch(createNote)
+];
+
+export { createNoteService };

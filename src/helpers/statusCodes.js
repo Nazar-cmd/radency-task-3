@@ -3,4 +3,11 @@ const CREATED = 201;
 
 const BAD_REQUEST = 400;
 
-export default { OK, CREATED, BAD_REQUEST };
+const INTERNAL_SERVER_ERROR = 500;
+
+export default {
+	OK,
+	CREATED,
+	BAD_REQUEST,
+	INTERNAL_SERVER_ERROR
+};

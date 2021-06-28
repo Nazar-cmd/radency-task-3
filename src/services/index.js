@@ -1,3 +1,3 @@
-import { createNoteServiceWithValidation } from "./notes/index.js";
+import { createNoteService } from "./notes/index.js";
 
-export { createNoteServiceWithValidation };
+export { createNoteService };

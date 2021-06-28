@@ -1,5 +1,5 @@
-import withValidation from "./withValidation.js";
+import validationMiddleware from "./validationMiddleware.js";
 import getCurrentDate from "./getCurrentDate.js";
 import statusCodes from "./statusCodes.js";
 
-export { getCurrentDate, withValidation, statusCodes };
+export { getCurrentDate, validationMiddleware, statusCodes };

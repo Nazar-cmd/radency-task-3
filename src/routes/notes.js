@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createNoteServiceWithValidation } from "../services/index.js";
+import { createNoteService } from "../services/index.js";
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get("/:id/");
 
 router.get("/notes/stats");
 
-router.post("/", createNoteServiceWithValidation);
+router.post("/", createNoteService);
 
 router.delete("/:id/");
 

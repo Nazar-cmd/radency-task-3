@@ -9,6 +9,7 @@ class Notes {
 
 	async createNote(newNote) {
 		this.#notes.push(newNote);
+		return newNote;
 	}
 
 	async getAllNotes() {
