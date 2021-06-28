@@ -10,6 +10,9 @@ const addNoteService = (req, res) => {
 	res.status(CREATED).json({ newNote });
 };
 
-const addNoteServiceWithValidation = withValidation(noteSchema, addNoteService);
+const createNoteServiceWithValidation = withValidation(
+	noteSchema,
+	addNoteService
+);
 
-export { addNoteServiceWithValidation };
+export { createNoteServiceWithValidation };
