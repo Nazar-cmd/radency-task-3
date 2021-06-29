@@ -6,14 +6,17 @@ module.exports = {
 
 	env: {
 		es2021: true,
-		node: true
+		node: true,
+		mocha: true
 	},
 	parserOptions: {
 		ecmaVersion: 12,
 		sourceType: "module"
 	},
 	rules: {
-		"object-curly-newline": 2,
+		'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
+		'consistent-return': 0,
+		"object-curly-newline": 0,
 		"import/extensions": 0,
 		"import/prefer-default-export": 0,
 		"comma-dangle": ["error", "never"],

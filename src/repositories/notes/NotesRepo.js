@@ -1,4 +1,5 @@
 import _state from "./_state.js";
+import { errors } from "../../helpers/index.js";
 
 export class NotesRepo {
 	#notes = [];
@@ -23,7 +24,7 @@ export class NotesRepo {
 
 	async deleteNote(index) {
 		this.indexValidation(index);
-		return this.#notes.splice(index, 1);
+		return this.#notes.splice(index, 1)[0];
 	}
 
 	async updateNote(index, newNote) {
@@ -40,7 +41,7 @@ export class NotesRepo {
 
 	indexValidation(index) {
 		if (index > this.#notes.length - 1) {
-			throw new Error("There is no note with such index");
+			throw errors.INVALID_NOTE_ID;
 		}
 	}
 }
