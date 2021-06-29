@@ -1,0 +1,11 @@
+---
+application:
+  name: "radency-task-3"
+  project: "radency-task-3"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-radency-task-3"
+  routes:
+  - application_name: "radency-task-3"
+    paths:
+    - "/*"
