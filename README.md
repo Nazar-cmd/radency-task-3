@@ -1,16 +1,16 @@
 ![CI/CD](https://github.com/nazar-cmd/radency-task-3/workflows/CI/CD/badge.svg)
 
-#Radency task 3
-##REST API for notes app via node.js
+# Radency task 3
+## REST API for notes app via node.js
 
 ***
 
-###Start
+### Start
 
 * `npm start` - start a server
 * `npm test` - run endpoints tests
 
-###Endpoints
+### Endpoints
 
 * `GET /notes` - get all notes list
 * `GET /notes/:id` - get one note
