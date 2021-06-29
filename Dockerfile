@@ -1,11 +1,13 @@
-FROM node:14-alpine as base
+FROM node:14
 
-WORKDIR /src
+WORKDIR /usr/src/app
 COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
 EXPOSE 3000
 
-FROM base as production
-ENV NODE_ENV=production
-RUN npm ci
-COPY . ./
+
 CMD ["npm", "start"]
